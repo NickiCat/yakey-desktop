@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Обёртка для бинда/скриптов: yakey-pick [имя] — скопировать код аккаунта или открыть выбор
+if [[ -n "${1:-}" ]]; then
+  exec yakey --copy "$1"
+fi
+exec yakey --pick

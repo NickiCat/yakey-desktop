@@ -1,0 +1,52 @@
+appId: space.nicko.yakey
+productName: yakey
+directories:
+  output: dist
+  buildResources: build
+files:
+  - out/**/*
+  - package.json
+asarUnpack: []
+extraResources:
+  - from: resources/
+    to: .
+    filter:
+      - "*.png"
+linux:
+  target:
+    - deb
+    - pacman
+    - rpm
+  executableName: yakey
+  category: Utility
+  synopsis: Яндекс Ключ для Linux
+  maintainer: Nickola Sidorov <86476954+NickiCat@users.noreply.github.com>
+  desktop:
+    entry:
+      StartupWMClass: yakey
+win:
+  target:
+    - nsis
+nsis:
+  artifactName: ${name}-${version}-setup.${ext}
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+deb:
+  artifactName: ${name}_${version}_${arch}.${ext}
+  recommends:
+    - wl-clipboard
+    - wtype
+    - fprintd
+rpm:
+  artifactName: ${name}-${version}.x86_64.${ext}
+pacman:
+  artifactName: ${name}-${version}-1-x86_64.pkg.tar.zst
+  fpm:
+    - --pacman-compression
+    - zstd
+    - --pacman-optional-depends
+    - "wl-clipboard: копирование через wl-copy"
+    - --pacman-optional-depends
+    - "wtype: ввод кода вместо буфера"
+    - --pacman-optional-depends
+    - "fprintd: разблокировка отпечатком пальца"
